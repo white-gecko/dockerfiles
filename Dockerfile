@@ -2,6 +2,9 @@ FROM ubuntu
 
 MAINTAINER Mike Gardiner <conversationing@gmail.com>
 
+# Let the conatiner know that there is no tty
+ENV DEBIAN_FRONTEND noninteractive
+
 RUN apt-get update
 
 RUN apt-get -y install sudo
