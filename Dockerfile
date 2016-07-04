@@ -9,9 +9,9 @@ RUN apt-get update && \
     apt-get -y install openssh-server git && \
     rm -rf /var/lib/apt/lists/*
 
-
-RUN locale-gen en_US.UTF-8
-RUN dpkg-reconfigure locales
+RUN cp /usr/share/i18n/SUPPORTED /etc/locale.gen
+RUN locale-gen
+#RUN dpkg-reconfigure locales
 
 # To avoid annoying "perl: warning: Setting locale failed." errors,
 # do not allow the client to pass custom locals, see:
