@@ -9,14 +9,11 @@ RUN apt-get update && \
     apt-get -y install openssh-server git && \
     rm -rf /var/lib/apt/lists/*
 
+# Enable all supported locales, for the generation process see also:
+# - https://people.debian.org/~schultmc/locales.html
+# - https://wiki.debian.org/Locale
 RUN cp /usr/share/i18n/SUPPORTED /etc/locale.gen
 RUN locale-gen
-#RUN dpkg-reconfigure locales
-
-# To avoid annoying "perl: warning: Setting locale failed." errors,
-# do not allow the client to pass custom locals, see:
-# http://stackoverflow.com/a/2510548/15677
-RUN sed -i 's/^AcceptEnv LANG LC_\*$//g' /etc/ssh/sshd_config
 
 RUN mkdir /var/run/sshd
 
