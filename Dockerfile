@@ -5,11 +5,10 @@ MAINTAINER Mike Gardiner <conversationing@gmail.com>
 # Let the conatiner know that there is no tty
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN apt-get update
+RUN apt-get update && \
+    apt-get -y install openssh-server git && \
+    rm -rf /var/lib/apt/lists/*
 
-RUN apt-get -y install sudo
-RUN apt-get -y install openssh-server
-RUN apt-get -y install git
 
 RUN locale-gen en_US.UTF-8
 RUN dpkg-reconfigure locales
